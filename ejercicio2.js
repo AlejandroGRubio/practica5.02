@@ -69,7 +69,6 @@ window.onload = () =>{
                         return respuesta.json();
                     })
                     .then((datos) => {
-                        console.log(datos);
                         bibliApi.generarInfoPoderes(datos, `divInfo`);
       
                     });
