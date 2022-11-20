@@ -33,15 +33,11 @@ window.onload = () =>{
         return respuesta.json();
     })
     .then((datos) => {
-        console.log(datos.results);
         biblioPelis.generarListasPelis(datos.results, `divPelis`);
       
     });
 
     doc.getElementById(`divPelis`).addEventListener(`click`, (e) => {
-
-       console.log(e.target.tagName);
-       console.log(e.target.innerText);
 
         if (doc.getElementsByClassName(`clicked`) != undefined) {
             
@@ -62,7 +58,6 @@ window.onload = () =>{
             return respuesta.json();
         })
             .then((datos) => {
-            console.log(datos.results);
             biblioPelis.generarInfoPelis(e.target.innerText,datos.results, `divInfo`);
       
         });

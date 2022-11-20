@@ -93,7 +93,6 @@ export function generarInfoPelis(nombrePeli, objPelis, idUbi) {
 
         }
 
-        console.log(cuerpo);
 
         doc.getElementById(idUbi).appendChild(cuerpo);
 
@@ -104,9 +103,6 @@ export function generarInfoPelis(nombrePeli, objPelis, idUbi) {
     sacarDatosPersonajes(urlPersonajes, `personajes`);
 
     doc.getElementById(`personajes`).addEventListener(`click`, (e) => {
-
-        console.log(e.target.tagName);
-        console.log(e.target.innerText);
 
 
         if (doc.getElementsByClassName(`infoPersonajePulsado`) != undefined) {
@@ -119,7 +115,6 @@ export function generarInfoPelis(nombrePeli, objPelis, idUbi) {
                 var o = selec[i];
 
                 o.className = `infoPersonaje`;
-                console.log(o.firstElementChild);
                 o.firstElementChild.className = `ocultoDatos`;
                 
             }
@@ -149,7 +144,7 @@ export function sacarDatosPersonajes(arrayUrl, idUbi){
 
     while(num < 10){
 
-        console.log(arrayUrl[num]);
+
 
         fetch(arrayUrl[num])
             .then((respuesta) => {

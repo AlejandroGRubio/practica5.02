@@ -1,0 +1,28 @@
+.clicked{
+    text-decoration: underline;
+    color: lightgreen;
+}
+
+.noClicked{
+
+    color: green;
+
+
+}
+body{
+    background-color: black;
+}
+
+.mostrarInfo{
+
+    color: green;
+    border: 0.1em solid lightgreen;
+    text-align: center;
+
+
+}
+
+.poderesOculto{
+    display: none;
+}
+
