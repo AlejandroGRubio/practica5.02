@@ -4,6 +4,7 @@ import * as biblioPelis from "./biblioteca/bibliotecaPelis.js";
 
 //Es normal que tarde a veces, en clase le costaba bastante, pero funcionar funciona.
 window.onload = () =>{
+    
 
     //Creamos los elementos para el html.
     const url = "http://swapi.dev/api/films";
@@ -22,6 +23,8 @@ window.onload = () =>{
     //Los añadimos al html.
     doc.body.appendChild(divPelis);
     doc.body.appendChild(divInfo);
+
+    
 
 
     //Generamos la lista de películas.
@@ -60,16 +63,16 @@ window.onload = () =>{
         })
             .then((datos) => {
             console.log(datos.results);
-            biblioPelis.generarInfoPelis(e.target.innerText,datos.results, `divInfo`, 10);
+            biblioPelis.generarInfoPelis(e.target.innerText,datos.results, `divInfo`);
       
         });
        }
-
        
 
 
-
     });
+
+    
 
 
 

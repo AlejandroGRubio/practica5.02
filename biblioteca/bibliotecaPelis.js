@@ -27,8 +27,10 @@ export function generarListasPelis(arrObjPelis, idUbi) {
 
 }
 
-//Creamos el apartado con la info de la pelicula seleccionada y le añadimos los datos de la misma, para luego añadirla donde indica el id.
-export function generarInfoPelis(nombrePeli, objPelis, idUbi, numPer) {
+
+//Creamos el apartado con la info de la película seleccionada y le añadimos los datos de la misma, para luego añadirla donde indica el id. Además añadirán el addEventListener (ya que no se puede poner en el script principal
+// por el problema de la carga, que sale error en añadir el addEventListener).
+export function generarInfoPelis(nombrePeli, objPelis, idUbi) {
     
     if (doc.getElementsByClassName(`mostrarInfo`) != undefined) {
             
@@ -95,52 +97,124 @@ export function generarInfoPelis(nombrePeli, objPelis, idUbi, numPer) {
 
         doc.getElementById(idUbi).appendChild(cuerpo);
 
-        sacarDatosPersonajes(urlPersonajes, numPer, `personajes`);
+        
+
+
+    });
+    sacarDatosPersonajes(urlPersonajes, `personajes`);
+
+    doc.getElementById(`personajes`).addEventListener(`click`, (e) => {
+
+        console.log(e.target.tagName);
+        console.log(e.target.innerText);
+
+
+        if (doc.getElementsByClassName(`infoPersonajePulsado`) != undefined) {
+            
+            var selec = doc.getElementsByClassName(`infoPersonajePulsado`);
+            
+            
+            for (let i = 0; i < selec.length; i++) {
+
+                var o = selec[i];
+
+                o.className = `infoPersonaje`;
+                console.log(o.firstElementChild);
+                o.firstElementChild.className = `ocultoDatos`;
+                
+            }
+        }
+
+
+        if (e.target.tagName == `P`) {
+            e.target.className = `infoPersonajePulsado`;
+            e.target.firstElementChild.className = `datos`;
+
+
+
+
+        }
+
+
+
 
 
     });
 
 }
+//Saca las 10 URL del array y pasa los datos.
+export function sacarDatosPersonajes(arrayUrl, idUbi){
 
-export function sacarDatosPersonajes(arrayUrl, numPersonajes, idUbi){
+    var num = 0;
 
+    while(num < 10){
 
-    for (let i = 0; i < numPersonajes; i++) {
+        console.log(arrayUrl[num]);
 
-        fetch(arrayUrl[i])
+        fetch(arrayUrl[num])
             .then((respuesta) => {
                 return respuesta.json();
         })
             .then((datos) => {
-                console.log(datos);
-               // imprimirNombrePersonajes(datos, idUbi);
+                imprimirNombrePersonajes(datos, idUbi);
       
-        });
+        })
+        .catch((error) => {
+            // Se recoge el error y se gestiona.
+            console.log(`Ha habido algún error: ${error.message}`);
+          });
 
 
+          num ++;
+    };
 
-        
-    }
 
-
-    
 
 
 
     
 }
 
+//Añade los datos al nombre y los pone ocultos.
 function imprimirNombrePersonajes(obj, idUbi) {
     
     var parrafoNombre = doc.createElement(`p`);
+    var divDatosConcre = doc.createElement(`div`);
 
     parrafoNombre.className = `infoPersonaje`;
     
     parrafoNombre.innerHTML = obj.name;
 
+
+    divDatosConcre.className = `ocultoDatos`;
+    var genero = doc.createElement(`p`);
+    genero.innerHTML = `Género: ${obj.gender}`;
+
+    var altura = doc.createElement(`p`);
+    altura.innerHTML = `Altura: ${obj.height}`;
+
+    var peso = doc.createElement(`p`);
+    peso.innerHTML = `Peso: ${obj.mass}`;
+
+    var colorPelo = doc.createElement(`p`);
+    colorPelo.innerHTML = `Color de pelo: ${obj.hair_color}`;
+
+    var colorOjos = doc.createElement(`p`);
+    colorOjos.innerHTML = `Color de ojos: ${obj.eye_color}`;
+
+    divDatosConcre.appendChild(genero);
+    divDatosConcre.appendChild(altura);
+    divDatosConcre.appendChild(peso);
+    divDatosConcre.appendChild(colorPelo);
+    divDatosConcre.appendChild(colorOjos);
+
+    parrafoNombre.appendChild(divDatosConcre);
+
+
     doc.getElementById(idUbi).appendChild(parrafoNombre);
 
 
 
-
 }
+
+

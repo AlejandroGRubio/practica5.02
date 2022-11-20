@@ -18,3 +18,14 @@ body{
     border: 0.1em solid yellow;
     text-align: center;
 }
+
+
+.ocultoDatos{
+    display: none;
+}
+
+ .datos{
+    color: lightyellow;
+    text-decoration: none;
+}
+
